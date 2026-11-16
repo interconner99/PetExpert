@@ -1,0 +1,16 @@
+[build]
+  publish = "netlify-public"
+  command = "test -f netlify-public/index.html"
+
+[[redirects]]
+  from = "/admin"
+  to = "https://pet-expert-workspace-2026.pipedcarp1.chatgpt.site/"
+  status = 302
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+    Content-Security-Policy = "default-src 'none'; style-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
