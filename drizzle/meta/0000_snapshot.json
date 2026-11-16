@@ -1,0 +1,95 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "1c340432-f8bd-4001-9b98-38dd06e765f9",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "executive_records": {
+      "name": "executive_records",
+      "columns": {
+        "kind": {
+          "name": "kind",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "data": {
+          "name": "data",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "one_active_demo_loan": {
+          "name": "one_active_demo_loan",
+          "columns": [
+            "json_extract(data,'$.asset')"
+          ],
+          "isUnique": true,
+          "where": "kind='loan' AND json_extract(data,'$.returned')=''"
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "executive_records_kind_id_pk": {
+          "columns": [
+            "kind",
+            "id"
+          ],
+          "name": "executive_records_kind_id_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "record_json": {
+          "name": "record_json",
+          "value": "json_valid(data)"
+        }
+      }
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {
+      "one_active_demo_loan": {
+        "columns": {
+          "json_extract(data,'$.asset')": {
+            "isExpression": true
+          }
+        }
+      }
+    }
+  }
+}
